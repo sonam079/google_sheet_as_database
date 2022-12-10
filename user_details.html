@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Save User Details To Google Sheet - User Details</title>
+<script
+  src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script>
+<script>
+function SubForm (){
+    mobile_number = document.getElementById('phone_number').value
+    console.log(mobile_number)
+    var phone_no = /^\d{10}$/;
+    if(mobile_number.match(phone_no))
+    {
+          $.ajax({
+          url:'https://api.apispreadsheets.com/data/t7uUxMCoNhKq39YS/',
+          type:'post',
+          data:$("#myForm").serializeArray(),
+          success: function(){
+            alert("User Details Submitted :)")
+          },
+          error: function(){
+            alert("There was an error :(")
+          }
+      });
+    }
+    else
+    {
+       alert("Not a valid Phone Number");
+       return false;
+    }
+}
+</script>
+</head>
+<body>
+  <form id="myForm">
+    <label>First Name</label>
+    <br/>
+    <input name="first_name" />
+    <br/>
+      <label>Last Name</label>
+    <br/>
+    <input name="last_name" />
+    <br/>
+    <label>Mobile Number</label>
+    <br/>
+    <input id="phone_number" name="mobile_number"/>
+    <br/>
+    <br/>
+  </form>
+  <button onclick="SubForm()">Submit</button>
+</body>
+</html>
